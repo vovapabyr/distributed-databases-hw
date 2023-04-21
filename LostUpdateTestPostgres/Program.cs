@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 var connString = "Server=localhost:5432;Database=postgres;User Id=postgres;Password=postgres;";
 
-//await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
+await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
 
 //await RunTestWithExecutionTimeLogged("In-place Update Test", InPlaceUpdate);
 
@@ -13,8 +13,7 @@ var connString = "Server=localhost:5432;Database=postgres;User Id=postgres;Passw
 
 //await RunTestWithExecutionTimeLogged("Optimistic Concurrency Control Update Test", OptimisticConcurrencyUpdate, 2, 50_000);
 
-//Automatically deletecting lost updates with the help of isolations level
-await RunTestWithExecutionTimeLogged("Automatic Lost Update Deletection Test", AutomaticLostUpdateDetection);
+//await RunTestWithExecutionTimeLogged("Automatic Lost Update Deletection Test", AutomaticLostUpdateDetection);
 
 Console.ReadLine();
 
