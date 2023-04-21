@@ -5,6 +5,8 @@ var connString = "Server=localhost:5432;Database=postgres;User Id=postgres;Passw
 
 await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
 
+//await RunTestWithExecutionTimeLogged("In-place Update Test", InPlaceUpdate);
+
 Console.ReadLine();
 
 void LostUpdate(NpgsqlConnection conn) 
@@ -12,6 +14,12 @@ void LostUpdate(NpgsqlConnection conn)
     var counter = GetCounter(conn);
     counter = counter + 1;
     UpdateCounter(conn, counter);
+}
+
+void InPlaceUpdate(NpgsqlConnection conn)
+{
+    using var cmdUpdate = new NpgsqlCommand("UPDATE user_counter SET Counter = Counter + 1 WHERE User_Id = 1", conn);
+    cmdUpdate.ExecuteNonQuery();
 }
 
 #region helpers
@@ -49,7 +57,7 @@ IEnumerable<Task> RunTasks(Action<NpgsqlConnection> testFunc)
             {
                 conn.Open();
                 for (int j = 0; j < 10_000; j++)
-                    testFunc(conn);
+                        testFunc(conn);
             }
         });
 }
