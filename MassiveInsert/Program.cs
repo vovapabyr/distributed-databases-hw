@@ -3,9 +3,11 @@ using System.Diagnostics;
 
 var connString = "Server=localhost:5432;Database=postgres;User Id=postgres;Password=postgres;";
 
-await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
+//await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
 
 //await RunTestWithExecutionTimeLogged("In-place Update Test", InPlaceUpdate);
+
+await RunTestWithExecutionTimeLogged("Row-lovel Locking Update Test", RowLockUpdate);
 
 Console.ReadLine();
 
@@ -20,6 +22,16 @@ void InPlaceUpdate(NpgsqlConnection conn)
 {
     using var cmdUpdate = new NpgsqlCommand("UPDATE user_counter SET Counter = Counter + 1 WHERE User_Id = 1", conn);
     cmdUpdate.ExecuteNonQuery();
+}
+
+void RowLockUpdate(NpgsqlConnection conn)
+{
+    // The weakest isolation level explicitly used to demonstrate that FOR UPDATE fixes lost update, not isolation level.
+    using var tx = conn.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted);
+    var counter = GetCounter(conn, true);
+    counter = counter + 1;
+    UpdateCounter(conn, counter);
+    tx.Commit();
 }
 
 #region helpers
@@ -62,9 +74,11 @@ IEnumerable<Task> RunTasks(Action<NpgsqlConnection> testFunc)
         });
 }
 
-int GetCounter(NpgsqlConnection conn)
+int GetCounter(NpgsqlConnection conn, bool rowLock = false)
 {
-    using var cmdSelect = new NpgsqlCommand("SELECT Counter FROM user_counter WHERE User_Id = 1", conn);
+    var select = "SELECT Counter FROM user_counter WHERE User_Id = 1";
+    select = rowLock ? $"{select} FOR UPDATE" : select;
+    using var cmdSelect = new NpgsqlCommand(select, conn);
     return (int)cmdSelect.ExecuteScalar();
 }
 
@@ -76,5 +90,3 @@ int UpdateCounter(NpgsqlConnection conn, int counter)
 }
 
 #endregion
-
-
