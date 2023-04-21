@@ -21,3 +21,7 @@ Optimistic concurrency with 2 threads and 50 000 iterations per each is a way fa
 ![optimistic_concurrency_10_x_10000](https://user-images.githubusercontent.com/25819135/233638991-60bc441e-23fd-4a5b-9dea-df45ac8c1012.png)
 #### 2 Threads with 50 000 iterations ~ 4min 20s
 ![optimistic_concurrency_2_x_50000](https://user-images.githubusercontent.com/25819135/233639349-20470538-d24a-4214-8b99-71f5c3379501.png)
+### Optimistic Concurrency With Automatic Lost Update Detection ~ 3min 40s
+Another optimistic approach is to let database automaticaly detect lost updates (at least REPEATABLE READ isolation level required) and then retry failed transaction. On lost update detection we get next exception:
+![automatic_detection_update_error](https://user-images.githubusercontent.com/25819135/233646775-5190f712-b5c3-4fbb-a25f-821c599491b3.png) which we need to handle and retry.
+![automatic_detection_update_10_x_10000](https://user-images.githubusercontent.com/25819135/233646893-5531cfd4-797d-4fdd-a8f6-76f22208dd9d.png)

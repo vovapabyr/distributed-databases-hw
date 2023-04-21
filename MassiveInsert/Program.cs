@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 var connString = "Server=localhost:5432;Database=postgres;User Id=postgres;Password=postgres;";
 
-await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
+//await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", LostUpdate);
 
 //await RunTestWithExecutionTimeLogged("In-place Update Test", InPlaceUpdate);
 
@@ -12,6 +12,9 @@ await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", Lost
 //await RunTestWithExecutionTimeLogged("Optimistic Concurrency Control Update Test", OptimisticConcurrencyUpdate);
 
 //await RunTestWithExecutionTimeLogged("Optimistic Concurrency Control Update Test", OptimisticConcurrencyUpdate, 2, 50_000);
+
+//Automatically deletecting lost updates with the help of isolations level
+await RunTestWithExecutionTimeLogged("Automatic Lost Update Deletection Test", AutomaticLostUpdateDetection);
 
 Console.ReadLine();
 
@@ -69,6 +72,20 @@ void OptimisticConcurrencyUpdate(NpgsqlConnection conn)
     }
 }
 
+void AutomaticLostUpdateDetection(NpgsqlConnection conn)
+{
+    int counter;
+    using var tx = conn.BeginTransaction(System.Data.IsolationLevel.RepeatableRead);
+    using (var cmdSelect = new NpgsqlCommand("SELECT Counter FROM user_counter WHERE User_Id = 1", conn))
+        counter = (int)cmdSelect.ExecuteScalar();
+
+    counter = counter + 1;
+
+    using var cmdUpdate = new NpgsqlCommand($"UPDATE user_counter SET Counter = {counter} WHERE User_Id = 1", conn);
+    cmdUpdate.ExecuteNonQuery();
+    tx.Commit();
+}
+
 #region helpers
 
 async Task RunTestWithExecutionTimeLogged(string testName, Action<NpgsqlConnection> testFunc, int tasksCount = 10, int iterationsPerTaskCount = 10_000)
@@ -105,7 +122,15 @@ IEnumerable<Task> RunTasks(Action<NpgsqlConnection> testFunc, int tasksCount, in
             {
                 conn.Open();
                 for (int j = 0; j < iterationsPerTaskCount; j++)
+                    try
+                    {
                         testFunc(conn);
+                    }
+                    catch
+                    {
+                        // Retry same update in case of AutomaticLostUpdateDetection.
+                        j--;
+                    }
             }
         });
 }
