@@ -1,5 +1,6 @@
 # Lost Update Solutions Test
-Uncomment the test you want to run.
+Uncomment the test you want to run:
+![image](https://user-images.githubusercontent.com/25819135/233640597-afcf3ba0-c56f-499f-8e05-f3d7e5b26dbc.png)
 
 ## Lost Update Test ~ 1min 20s
 As we can see lost update problem happens. Instead of 100 000, we get 10 354

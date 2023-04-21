@@ -9,10 +9,8 @@ await RunTestWithExecutionTimeLogged("Read-Modify-Write: Lost Update Test", Lost
 
 //await RunTestWithExecutionTimeLogged("Row-level Locking Update Test", RowLockUpdate);
 
-// Optimistic concurrency is super slow with 10 threads and 10_000 iterations each ~ 40min
 //await RunTestWithExecutionTimeLogged("Optimistic Concurrency Control Update Test", OptimisticConcurrencyUpdate);
 
-// Optimistic concurrency with 10 threads with 50_000 iterations per each is a way faster ~  4min. So, we can see the prove that Optimistic Concurrency has performance degradation with big number of concurrent updates.
 //await RunTestWithExecutionTimeLogged("Optimistic Concurrency Control Update Test", OptimisticConcurrencyUpdate, 2, 50_000);
 
 Console.ReadLine();
