@@ -19,9 +19,14 @@ Console.ReadLine();
 
 void LostUpdate(NpgsqlConnection conn) 
 {
-    var counter = GetCounter(conn);
+    int counter;
+    using (var cmdSelect = new NpgsqlCommand("SELECT Counter FROM user_counter WHERE User_Id = 1", conn))
+        counter = (int)cmdSelect.ExecuteScalar();
+
     counter = counter + 1;
-    UpdateCounter(conn, counter);
+
+    using var cmdUpdate = new NpgsqlCommand($"UPDATE user_counter SET Counter = {counter} WHERE User_Id = 1", conn);
+    cmdUpdate.ExecuteNonQuery();
 }
 
 void InPlaceUpdate(NpgsqlConnection conn)
@@ -33,10 +38,15 @@ void InPlaceUpdate(NpgsqlConnection conn)
 void RowLockUpdate(NpgsqlConnection conn)
 {
     // The weakest isolation level explicitly used to demonstrate that FOR UPDATE fixes lost update, not isolation level.
+    int counter;
     using var tx = conn.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted);
-    var counter = GetCounter(conn, true);
+    using (var cmdSelect = new NpgsqlCommand("SELECT Counter FROM user_counter WHERE User_Id = 1 FOR UPDATE", conn))
+        counter = (int)cmdSelect.ExecuteScalar();
+
     counter = counter + 1;
-    UpdateCounter(conn, counter);
+
+    using var cmdUpdate = new NpgsqlCommand($"UPDATE user_counter SET Counter = {counter} WHERE User_Id = 1", conn);
+    cmdUpdate.ExecuteNonQuery();
     tx.Commit();
 }
 
@@ -78,7 +88,8 @@ async Task RunTestWithExecutionTimeLogged(string testName, Action<NpgsqlConnecti
 
     using var conn = new NpgsqlConnection(connString);
     conn.Open();
-    Console.WriteLine($"Counter: {GetCounter(conn)}");
+    using (var cmdSelect = new NpgsqlCommand("SELECT Counter FROM user_counter WHERE User_Id = 1", conn))
+        Console.WriteLine($"Counter: {(int)cmdSelect.ExecuteScalar()}");
     
     using var cmdReset = new NpgsqlCommand("UPDATE user_counter SET Counter = 0, Version = 0 WHERE User_Id = 1", conn);
     if(cmdReset.ExecuteNonQuery() > 0)
@@ -89,7 +100,6 @@ async Task RunTestWithExecutionTimeLogged(string testName, Action<NpgsqlConnecti
 
 IEnumerable<Task> RunTasks(Action<NpgsqlConnection> testFunc, int tasksCount, int iterationsPerTaskCount)
 {
-    // Run 10 tasks, each of which executes test function 10_000 times.
     for (int i = 0; i < tasksCount; i++)
         yield return Task.Run(() =>
         {
@@ -100,21 +110,6 @@ IEnumerable<Task> RunTasks(Action<NpgsqlConnection> testFunc, int tasksCount, in
                         testFunc(conn);
             }
         });
-}
-
-int GetCounter(NpgsqlConnection conn, bool rowLock = false)
-{
-    var select = "SELECT Counter FROM user_counter WHERE User_Id = 1";
-    select = rowLock ? $"{select} FOR UPDATE" : select;
-    using var cmdSelect = new NpgsqlCommand(select, conn);
-    return (int)cmdSelect.ExecuteScalar();
-}
-
-int UpdateCounter(NpgsqlConnection conn, int counter) 
-{
-    using var cmdUpdate = new NpgsqlCommand("UPDATE user_counter SET Counter = @counter WHERE User_Id = 1", conn);
-    cmdUpdate.Parameters.AddWithValue("counter", counter);
-    return cmdUpdate.ExecuteNonQuery();
 }
 
 #endregion
