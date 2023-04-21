@@ -1,4 +1,6 @@
 # Lost Update Solutions Test
+All the tests are done at 'PostgreSQL 15.2 (Debian 15.2-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' on Docker. 
+
 Uncomment the test you want to run:
 ![image](https://user-images.githubusercontent.com/25819135/233640597-afcf3ba0-c56f-499f-8e05-f3d7e5b26dbc.png)
 
