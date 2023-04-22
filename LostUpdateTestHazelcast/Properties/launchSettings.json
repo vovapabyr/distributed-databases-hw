@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LostUpdateTestHazelcast": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
