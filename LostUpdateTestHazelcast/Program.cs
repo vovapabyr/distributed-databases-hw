@@ -1,6 +1,10 @@
 ﻿using Hazelcast;
 using Hazelcast.DistributedObjects;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+
+const string UserMapName = "users-map";
+const string UserMapKey = "user-1";
 
 await using var client = await HazelcastClientFactory.StartNewClientAsync(BuilHazelcastOptions());
 var logger = client.Options.LoggerFactory.CreateLogger<Program>();
@@ -11,11 +15,8 @@ await RunTest(client, logger);
 
 async Task LostUpdateTest(IHMap<string, int> map) 
 {
-    for (int i = 0; i < 10_000; i++)
-    {
-        var value = await map.GetAsync("user-1");
-        await map.SetAsync("user-1", value + 1);
-    }
+    var value = await map.GetAsync(UserMapKey);
+    await map.SetAsync(UserMapKey, value + 1);
 }
 
 #endregion
@@ -25,18 +26,43 @@ async Task LostUpdateTest(IHMap<string, int> map)
 async Task RunTest(IHazelcastClient client, ILogger<Program> logger) 
 {
     var testName = args[0];
-    logger.LogInformation($"Start: {testName}");
-    await using var map = await client.GetMapAsync<string, int>("users-map");
-    switch (testName) 
+    await using var map = await client.GetMapAsync<string, int>(UserMapName);
+    logger.LogInformation($"Starting: {testName}");
+    Stopwatch stopwatch = new Stopwatch();
+    stopwatch.Start();
+    
+    IEnumerable<Task> tasks;
+    switch (testName)
     {
         case "LostUpdate":
-            await LostUpdateTest(map);
+            tasks = RunTasks(async () => await LostUpdateTest(map));
             break;
         default:
             throw new NotSupportedException(testName);
     }
 
-    logger.LogInformation($"Ended: {testName}");
+    await Task.WhenAll(tasks);
+
+    stopwatch.Stop();
+    logger.LogInformation($"Execution Time: {stopwatch.ElapsedMilliseconds} ms");
+
+    var value = await map.GetAsync(UserMapKey);
+    logger.LogInformation($"Counter: {value}");
+
+    await map.SetAsync(UserMapKey, 0);
+    logger.LogInformation($"Reset counter to 0");
+}
+
+IEnumerable<Task> RunTasks(Func<Task> testFunc)
+{
+    for (int i = 0; i < 10; i++)
+        yield return Task.Run(async () =>
+        {
+            for (int j = 0; j < 10_000; j++)
+            {
+                await testFunc();
+            }
+        });
 }
 
 #endregion
