@@ -1,4 +1,5 @@
 ﻿using Hazelcast;
+using Hazelcast.Core;
 using Hazelcast.DistributedObjects;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -6,10 +7,7 @@ using System.Diagnostics;
 const string UserMapName = "users-map";
 const string UserMapKey = "user-1";
 
-await using var client = await HazelcastClientFactory.StartNewClientAsync(BuilHazelcastOptions());
-var logger = client.Options.LoggerFactory.CreateLogger<Program>();
-
-await RunTest(client, logger);
+await RunTest();
 
 #region tests
 
@@ -19,14 +17,44 @@ async Task LostUpdateTest(IHMap<string, int> map)
     await map.SetAsync(UserMapKey, value + 1);
 }
 
+async Task PesimisticLockingUpdateTest(IHMap<string, int> map)
+{
+    await Task.Delay(10);
+    await map.LockAsync(UserMapKey);
+
+    try
+    {
+        var value = await map.GetAsync(UserMapKey);
+        await map.SetAsync(UserMapKey, value + 1);
+    }
+    finally
+    {
+        await map.UnlockAsync(UserMapKey);
+    }
+}
+
+async Task OptimisticLockingUpdateTest(IHMap<string, int> map)
+{
+    while (true) 
+    {
+        var oldValue = await map.GetAsync(UserMapKey);
+        var newValue = oldValue + 1;
+        if (await map.ReplaceAsync(UserMapKey, oldValue, newValue))
+            break;
+    }
+}
+
 #endregion
 
 #region helpers
 
-async Task RunTest(IHazelcastClient client, ILogger<Program> logger) 
+async Task RunTest() 
 {
-    var testName = args[0];
+    await using var client = await HazelcastClientFactory.StartNewClientAsync(BuilHazelcastOptions());
+    var logger = client.Options.LoggerFactory.CreateLogger<Program>();
     await using var map = await client.GetMapAsync<string, int>(UserMapName);
+
+    var testName = args[0];
     logger.LogInformation($"Starting: {testName}");
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.Start();
@@ -35,7 +63,14 @@ async Task RunTest(IHazelcastClient client, ILogger<Program> logger)
     switch (testName)
     {
         case "LostUpdate":
-            tasks = RunTasks(async () => await LostUpdateTest(map));
+            tasks = RunTasks(() => LostUpdateTest(map));
+            break;
+        case "PesimisticLocking":
+            tasks = RunTasks(() => PesimisticLockingUpdateTest(map));
+            break;
+        case "OptimisticLocking":
+            await map.SetAsync(UserMapKey, 0);
+            tasks = RunTasks(() => OptimisticLockingUpdateTest(map));
             break;
         default:
             throw new NotSupportedException(testName);
@@ -45,7 +80,6 @@ async Task RunTest(IHazelcastClient client, ILogger<Program> logger)
 
     stopwatch.Stop();
     logger.LogInformation($"Execution Time: {stopwatch.ElapsedMilliseconds} ms");
-
     var value = await map.GetAsync(UserMapKey);
     logger.LogInformation($"Counter: {value}");
 
@@ -56,13 +90,16 @@ async Task RunTest(IHazelcastClient client, ILogger<Program> logger)
 IEnumerable<Task> RunTasks(Func<Task> testFunc)
 {
     for (int i = 0; i < 10; i++)
-        yield return Task.Run(async () =>
-        {
-            for (int j = 0; j < 10_000; j++)
+    {
+        using (var context = AsyncContext.New())
+            yield return Task.Run(async () =>
             {
-                await testFunc();
-            }
-        });
+                for (int j = 0; j < 10_000; j++)
+                {
+                    await testFunc();
+                }
+            });
+    }
 }
 
 #endregion
