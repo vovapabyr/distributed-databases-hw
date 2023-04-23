@@ -17,6 +17,15 @@ New AsyncContext for each thread solved the issue, but there was sagnificant per
 
 ## Optimistic Locking Update Test ~ 40s ([log file](logs/optimistic-lock-no-delay~45s.txt))
 ![image](https://user-images.githubusercontent.com/25819135/233844667-2499993c-1e7a-4a00-936a-daf934611001.png)
+It looks like Hazelcast .Net client map.ReplaceAsync has wrong parameters order: 
+```
+Task<bool> ReplaceAsync(TKey key, TValue newValue, TValue comparisonValue);
+```
+And here is the way it worked for me:
+```
+if (await map.ReplaceAsync("key", oldValue, newValue))
+    break;
+```
 
 ## CP Subsytem Atomic Long Test ~ 19s ([log file](logs/atomic-long~19s.txt), [cp log file](logs/hazelcast-node-cp-setup.txt))
 ![image](https://user-images.githubusercontent.com/25819135/233844870-8a2d321e-ddc5-468e-9cda-23c32c246029.png)
