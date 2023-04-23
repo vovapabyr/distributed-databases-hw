@@ -1,0 +1,96 @@
+2023-04-23 16:31:07 ########################################
+2023-04-23 16:31:07 # JAVA=/usr/bin/java
+2023-04-23 16:31:07 # JAVA_OPTS=--add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED -Dhazelcast.logging.type=log4j2 -Dlog4j.configurationFile=file:/opt/hazelcast/config/log4j2.properties -Dhazelcast.config=/opt/hazelcast/config/hazelcast-docker.xml -Djet.custom.lib.dir=/opt/hazelcast/custom-lib -Djava.net.preferIPv4Stack=true -XX:MaxRAMPercentage=80.0 -XX:MaxGCPauseMillis=5 -Dhazelcast.config=/opt/hazelcast/config/hazelcast.yaml
+2023-04-23 16:31:07 # CLASSPATH=/opt/hazelcast/*:/opt/hazelcast/lib:/opt/hazelcast/lib/*:/opt/hazelcast/bin/user-lib:/opt/hazelcast/bin/user-lib/*
+2023-04-23 16:31:07 ########################################
+2023-04-23 16:31:08 2023-04-23 13:31:08,105 [ INFO] [main] [c.h.i.c.AbstractConfigLocator]: Loading configuration '/opt/hazelcast/config/hazelcast.yaml' from System property 'hazelcast.config'
+2023-04-23 16:31:08 2023-04-23 13:31:08,108 [ INFO] [main] [c.h.i.c.AbstractConfigLocator]: Using configuration file at /opt/hazelcast/config/hazelcast.yaml
+2023-04-23 16:31:08 2023-04-23 13:31:08,674 [ INFO] [main] [c.h.s.logo]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:08 +       +  o    o     o     o---o o----o o      o---o     o     o----o o--o--o
+2023-04-23 16:31:08 + +   + +  |    |    / \       /  |      |     /         / \    |         |   
+2023-04-23 16:31:08 + + + + +  o----o   o   o     o   o----o |    o         o   o   o----o    |   
+2023-04-23 16:31:08 + +   + +  |    |  /     \   /    |      |     \       /     \       |    |   
+2023-04-23 16:31:08 +       +  o    o o       o o---o o----o o----o o---o o       o o----o    o   
+2023-04-23 16:31:08 2023-04-23 13:31:08,674 [ INFO] [main] [c.h.system]: [172.22.0.3]:5701 [dev] [5.2.1] Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.
+2023-04-23 16:31:08 2023-04-23 13:31:08,674 [ INFO] [main] [c.h.system]: [172.22.0.3]:5701 [dev] [5.2.1] Hazelcast Platform 5.2.1 (20221114 - 531032a) starting at [172.22.0.3]:5701
+2023-04-23 16:31:08 2023-04-23 13:31:08,674 [ INFO] [main] [c.h.system]: [172.22.0.3]:5701 [dev] [5.2.1] Cluster name: dev
+2023-04-23 16:31:08 2023-04-23 13:31:08,675 [ INFO] [main] [c.h.system]: [172.22.0.3]:5701 [dev] [5.2.1] Integrity Checker is disabled. Fail-fast on corrupted executables will not be performed. For more information, see the documentation for Integrity Checker.
+2023-04-23 16:31:08 2023-04-23 13:31:08,678 [ INFO] [main] [c.h.system]: [172.22.0.3]:5701 [dev] [5.2.1] The Jet engine is disabled.
+2023-04-23 16:31:08 To enable the Jet engine on the members, do one of the following:
+2023-04-23 16:31:08   - Change member config using Java API: config.getJetConfig().setEnabled(true)
+2023-04-23 16:31:08   - Change XML/YAML configuration property: Set hazelcast.jet.enabled to true
+2023-04-23 16:31:08   - Add system property: -Dhz.jet.enabled=true (for Hazelcast embedded, works only when loading config via Config.load)
+2023-04-23 16:31:08   - Add environment variable: HZ_JET_ENABLED=true (recommended when running container image. For Hazelcast embedded, works only when loading config via Config.load)
+2023-04-23 16:31:09 2023-04-23 13:31:09,161 [ INFO] [main] [c.h.s.security]: [172.22.0.3]:5701 [dev] [5.2.1] Enable DEBUG/FINE log level for log category com.hazelcast.system.security  or use -Dhazelcast.security.recommendations system property to see 🔒 security recommendations and the status of current config.
+2023-04-23 16:31:09 2023-04-23 13:31:09,245 [ INFO] [main] [c.h.i.i.Node]: [172.22.0.3]:5701 [dev] [5.2.1] Using Multicast discovery
+2023-04-23 16:31:09 2023-04-23 13:31:09,251 [ INFO] [main] [c.h.c.CPSubsystem]: [172.22.0.3]:5701 [dev] [5.2.1] CP Subsystem is enabled with 3 members.
+2023-04-23 16:31:09 2023-04-23 13:31:09,552 [ INFO] [main] [c.h.i.d.Diagnostics]: [172.22.0.3]:5701 [dev] [5.2.1] Diagnostics disabled. To enable add -Dhazelcast.diagnostics.enabled=true to the JVM arguments.
+2023-04-23 16:31:09 2023-04-23 13:31:09,563 [ INFO] [main] [c.h.c.LifecycleService]: [172.22.0.3]:5701 [dev] [5.2.1] [172.22.0.3]:5701 is STARTING
+2023-04-23 16:31:11 2023-04-23 13:31:11,020 [ INFO] [hz.optimistic_blackburn.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.22.0.3]:5701 [dev] [5.2.1] Connection[id=1, /172.22.0.3:5701->/172.22.0.2:44892, qualifier=null, endpoint=null, remoteUuid=null, alive=false, connectionType=CSP, planeIndex=-1] closed. Reason: Connection closed by the other side
+2023-04-23 16:31:11 2023-04-23 13:31:11,752 [ INFO] [main] [c.h.i.c.ClusterService]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:11 
+2023-04-23 16:31:11 Members {size:1, ver:1} [
+2023-04-23 16:31:11 Member [172.22.0.3]:5701 - c263300f-6c24-459e-881d-3da75ff8c2d7 this
+2023-04-23 16:31:11 ]
+2023-04-23 16:31:11 
+2023-04-23 16:31:11 2023-04-23 13:31:11,763 [ INFO] [main] [c.h.c.LifecycleService]: [172.22.0.3]:5701 [dev] [5.2.1] [172.22.0.3]:5701 is STARTED
+2023-04-23 16:31:11 2023-04-23 13:31:11,867 [ INFO] [hz.optimistic_blackburn.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.22.0.3]:5701 [dev] [5.2.1] Initialized new cluster connection between /172.22.0.3:5701 and /172.22.0.5:35201
+2023-04-23 16:31:11 2023-04-23 13:31:11,954 [ INFO] [hz.optimistic_blackburn.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.22.0.3]:5701 [dev] [5.2.1] Initialized new cluster connection between /172.22.0.3:5701 and /172.22.0.6:48529
+2023-04-23 16:31:12 2023-04-23 13:31:12,127 [ INFO] [hz.optimistic_blackburn.priority-generic-operation.thread-0] [c.h.c.i.p.t.AuthenticationMessageTask]: [172.22.0.3]:5701 [dev] [5.2.1] Received auth from Connection[id=4, /172.22.0.3:5701->/172.22.0.2:44376, qualifier=null, endpoint=[172.22.0.2]:44376, remoteUuid=a58fd428-8ff5-4a79-86f0-1463ede0a9a8, alive=true, connectionType=CSP, planeIndex=-1], successfully authenticated, clientUuid: a58fd428-8ff5-4a79-86f0-1463ede0a9a8, client name: Lost Update Test Client, client version: 5.2.1
+2023-04-23 16:31:12 2023-04-23 13:31:12,536 [ INFO] [hz.optimistic_blackburn.cached.thread-3] [c.h.c.i.MetadataRaftGroupManager]: [172.22.0.3]:5701 [dev] [5.2.1] CP Subsystem is waiting for 3 members to join the cluster. Current member count: 1
+2023-04-23 16:31:17 2023-04-23 13:31:17,038 [ INFO] [hz.optimistic_blackburn.priority-generic-operation.thread-0] [c.h.i.c.ClusterService]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:17 
+2023-04-23 16:31:17 Members {size:3, ver:3} [
+2023-04-23 16:31:17 Member [172.22.0.3]:5701 - c263300f-6c24-459e-881d-3da75ff8c2d7 this
+2023-04-23 16:31:17 Member [172.22.0.5]:5701 - f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e
+2023-04-23 16:31:17 Member [172.22.0.6]:5701 - 357ddf38-94fd-4b31-bb42-f58054c6bb29
+2023-04-23 16:31:17 ]
+2023-04-23 16:31:17 
+2023-04-23 16:31:17 2023-04-23 13:31:17,243 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.i.p.i.PartitionStateManager]: [172.22.0.3]:5701 [dev] [5.2.1] Initializing cluster partition table arrangement...
+2023-04-23 16:31:17 2023-04-23 13:31:17,544 [ INFO] [hz.optimistic_blackburn.cached.thread-4] [c.h.c.i.RaftService]: [172.22.0.3]:5701 [dev] [5.2.1] RaftNode[CPGroupId{name='METADATA', seed=0, groupId=0}] is created with [RaftEndpoint{uuid='c263300f-6c24-459e-881d-3da75ff8c2d7'}, RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, RaftEndpoint{uuid='357ddf38-94fd-4b31-bb42-f58054c6bb29'}]
+2023-04-23 16:31:17 2023-04-23 13:31:17,545 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.RaftNode(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] Status is set to: ACTIVE
+2023-04-23 16:31:17 2023-04-23 13:31:17,935 [ INFO] [hz.optimistic_blackburn.priority-generic-operation.thread-0] [c.h.c.i.p.t.AuthenticationMessageTask]: [172.22.0.3]:5701 [dev] [5.2.1] Received auth from Connection[id=5, /172.22.0.3:5701->/172.22.0.4:46799, qualifier=null, endpoint=[172.22.0.4]:46799, remoteUuid=80d6f3e4-db98-46fe-8557-ab5e272b1d4b, alive=true, connectionType=MCJVM, planeIndex=-1], successfully authenticated, clientUuid: 80d6f3e4-db98-46fe-8557-ab5e272b1d4b, client name: MC-Client-dev, client version: 5.2.1
+2023-04-23 16:31:19 2023-04-23 13:31:19,961 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.h.PreVoteRequestHandlerTask(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] Granted pre-vote for PreVoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, nextTerm=1, lastLogTerm=0, lastLogIndex=0}
+2023-04-23 16:31:19 2023-04-23 13:31:19,965 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.h.VoteRequestHandlerTask(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] Moving to new term: 1 from current term: 0 after VoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, term=1, lastLogTerm=0, lastLogIndex=0, disruptive=false}
+2023-04-23 16:31:19 2023-04-23 13:31:19,965 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.RaftNode(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:19 
+2023-04-23 16:31:19 CP Group Members {groupId: METADATA(0), size:3, term:1, logIndex:0} [
+2023-04-23 16:31:19 CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701} - FOLLOWER this
+2023-04-23 16:31:19 CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701}
+2023-04-23 16:31:19 CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}
+2023-04-23 16:31:19 ]
+2023-04-23 16:31:19 
+2023-04-23 16:31:19 2023-04-23 13:31:19,965 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.h.VoteRequestHandlerTask(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] Granted vote for VoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, term=1, lastLogTerm=0, lastLogIndex=0, disruptive=false}
+2023-04-23 16:31:19 2023-04-23 13:31:19,970 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.h.AppendRequestHandlerTask(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] Setting leader: RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}
+2023-04-23 16:31:19 2023-04-23 13:31:19,970 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.r.i.RaftNode(METADATA)]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:19 
+2023-04-23 16:31:19 CP Group Members {groupId: METADATA(0), size:3, term:1, logIndex:0} [
+2023-04-23 16:31:19 CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701} - FOLLOWER this
+2023-04-23 16:31:19 CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701} - LEADER
+2023-04-23 16:31:19 CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}
+2023-04-23 16:31:19 ]
+2023-04-23 16:31:19 
+2023-04-23 16:31:20 2023-04-23 13:31:20,896 [ INFO] [hz.optimistic_blackburn.cached.thread-4] [c.h.c.i.MetadataRaftGroupManager]: [172.22.0.3]:5701 [dev] [5.2.1] CP Subsystem is initialized with: [CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701}, CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701}, CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}]
+2023-04-23 16:31:21 2023-04-23 13:31:21,293 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-0] [c.h.c.i.MetadataRaftGroupManager]: [172.22.0.3]:5701 [dev] [5.2.1] New CPGroupId{name='default', seed=0, groupId=7054} is created with [CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701}, CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}, CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701}]
+2023-04-23 16:31:21 2023-04-23 13:31:21,294 [ INFO] [hz.optimistic_blackburn.cached.thread-3] [c.h.c.i.RaftService]: [172.22.0.3]:5701 [dev] [5.2.1] RaftNode[CPGroupId{name='default', seed=0, groupId=7054}] is created with [RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, RaftEndpoint{uuid='357ddf38-94fd-4b31-bb42-f58054c6bb29'}, RaftEndpoint{uuid='c263300f-6c24-459e-881d-3da75ff8c2d7'}]
+2023-04-23 16:31:21 2023-04-23 13:31:21,294 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.RaftNode(default)]: [172.22.0.3]:5701 [dev] [5.2.1] Status is set to: ACTIVE
+2023-04-23 16:31:23 2023-04-23 13:31:23,639 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.h.PreVoteRequestHandlerTask(default)]: [172.22.0.3]:5701 [dev] [5.2.1] Granted pre-vote for PreVoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, nextTerm=1, lastLogTerm=0, lastLogIndex=0}
+2023-04-23 16:31:23 2023-04-23 13:31:23,641 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.h.VoteRequestHandlerTask(default)]: [172.22.0.3]:5701 [dev] [5.2.1] Moving to new term: 1 from current term: 0 after VoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, term=1, lastLogTerm=0, lastLogIndex=0, disruptive=false}
+2023-04-23 16:31:23 2023-04-23 13:31:23,641 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.RaftNode(default)]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:23 
+2023-04-23 16:31:23 CP Group Members {groupId: default(7054), size:3, term:1, logIndex:0} [
+2023-04-23 16:31:23 CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701}
+2023-04-23 16:31:23 CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}
+2023-04-23 16:31:23 CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701} - FOLLOWER this
+2023-04-23 16:31:23 ]
+2023-04-23 16:31:23 
+2023-04-23 16:31:23 2023-04-23 13:31:23,642 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.h.VoteRequestHandlerTask(default)]: [172.22.0.3]:5701 [dev] [5.2.1] Granted vote for VoteRequest{candidate=RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}, term=1, lastLogTerm=0, lastLogIndex=0, disruptive=false}
+2023-04-23 16:31:23 2023-04-23 13:31:23,643 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.h.AppendRequestHandlerTask(default)]: [172.22.0.3]:5701 [dev] [5.2.1] Setting leader: RaftEndpoint{uuid='f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e'}
+2023-04-23 16:31:23 2023-04-23 13:31:23,643 [ INFO] [hz.optimistic_blackburn.partition-operation.thread-8] [c.h.c.i.r.i.RaftNode(default)]: [172.22.0.3]:5701 [dev] [5.2.1] 
+2023-04-23 16:31:23 
+2023-04-23 16:31:23 CP Group Members {groupId: default(7054), size:3, term:1, logIndex:0} [
+2023-04-23 16:31:23 CPMember{uuid=f0a1c685-9bed-44f4-86fd-e1c8a6b6bc9e, address=[172.22.0.5]:5701} - LEADER
+2023-04-23 16:31:23 CPMember{uuid=357ddf38-94fd-4b31-bb42-f58054c6bb29, address=[172.22.0.6]:5701}
+2023-04-23 16:31:23 CPMember{uuid=c263300f-6c24-459e-881d-3da75ff8c2d7, address=[172.22.0.3]:5701} - FOLLOWER this
+2023-04-23 16:31:23 ]
+2023-04-23 16:31:23 

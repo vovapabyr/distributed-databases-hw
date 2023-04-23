@@ -1,0 +1,61 @@
+2023-04-23 16:21:52 info: Hazelcast.Clustering.Heartbeat[0]
+2023-04-23 16:21:52       Heartbeat with 5000ms period and 60000ms timeout
+2023-04-23 16:21:54 fail: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:54       Connection attempt failed due to possible DNS error.
+2023-04-23 16:21:54       System.FormatException: The string "lostupdatetesthazelcast-hazelcast-2:5701" does not represent a valid network address.
+2023-04-23 16:21:54          at Hazelcast.Networking.ConfigurationAddressProviderSource.GetAddresses(IEnumerable`1 configurationAddressStrings)
+2023-04-23 16:21:54          at Hazelcast.Networking.ConfigurationAddressProviderSource.GetAddresses(Boolean forceRefresh)
+2023-04-23 16:21:54          at Hazelcast.Clustering.ClusterConnections.GetClusterAddresses()+MoveNext()
+2023-04-23 16:21:54          at Hazelcast.Clustering.ClusterConnections.ConnectFirstAsync(CancellationToken cancellationToken)
+2023-04-23 16:21:54 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 16:21:54       Unable to connect to cluster after 1 attempts and 2567ms, will retry in 1000ms
+2023-04-23 16:21:55 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:55       Failed to connect to address 172.22.0.3:5701 (member is not active).
+2023-04-23 16:21:56 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:56       Failed to connect to address 172.22.0.6:5701 (member is not active).
+2023-04-23 16:21:56 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:56       Failed to connect to address 172.22.0.5:5701 (member is not active).
+2023-04-23 16:21:56 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 16:21:56       Unable to connect to cluster after 2 attempts and 4329ms, will retry in 1050ms
+2023-04-23 16:21:57 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:57       Failed to connect to address 172.22.0.3:5701 (member is not active).
+2023-04-23 16:21:57 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:57       Failed to connect to address 172.22.0.5:5701 (member is not active).
+2023-04-23 16:21:57 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:57       Failed to connect to address 172.22.0.6:5701 (member is not active).
+2023-04-23 16:21:57 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 16:21:57       Unable to connect to cluster after 3 attempts and 5392ms, will retry in 1102ms
+2023-04-23 16:21:58 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:21:58       Authenticated client 'Lost Update Test Client' (120fe57) running version 5.2.1+b15eca on connection 40e7a20 from 172.22.0.2:57052 to member 90db3c7 at 172.22.0.5:5701 of cluster 'dev' (3907e6a) running version 5.2.1.
+2023-04-23 16:21:58 info: Hazelcast.Clustering.ClusterMembers[0]
+2023-04-23 16:21:58       Members [1] {
+2023-04-23 16:21:58           Id=90db3c7 Internal=172.22.0.5:5701* Public=<none> Adding
+2023-04-23 16:21:58       }
+2023-04-23 16:21:58 info: Program[0]
+2023-04-23 16:21:58       Starting: AtomicLong
+2023-04-23 16:22:03 info: Hazelcast.Clustering.ClusterMembers[0]
+2023-04-23 16:22:03       Members [3] {
+2023-04-23 16:22:03           Id=90db3c7 Internal=172.22.0.5:5701* Public=<none> Unchanged
+2023-04-23 16:22:03           Id=56a2c38 Internal=172.22.0.6:5701* Public=<none> Adding
+2023-04-23 16:22:03           Id=760ad22 Internal=172.22.0.3:5701* Public=<none> Adding
+2023-04-23 16:22:03       }
+2023-04-23 16:22:03 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:03       Could not connect to member 56a2c38 at 172.22.0.6:5701: failed (member is not active).
+2023-04-23 16:22:03 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:03       Could not connect to member 760ad22 at 172.22.0.3:5701: failed (member is not active).
+2023-04-23 16:22:04 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:04       Authenticated client 'Lost Update Test Client' (120fe57) running version 5.2.1+b15eca on connection fb8d729 from 172.22.0.2:54552 to member 56a2c38 at 172.22.0.6:5701 of cluster 'dev' (3907e6a) running version 5.2.1.
+2023-04-23 16:22:04 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:04       Authenticated client 'Lost Update Test Client' (120fe57) running version 5.2.1+b15eca on connection d3f4d38 from 172.22.0.2:33444 to member 760ad22 at 172.22.0.3:5701 of cluster 'dev' (3907e6a) running version 5.2.1.
+2023-04-23 16:22:18 info: Program[0]
+2023-04-23 16:22:18       Execution Time: 19632 ms
+2023-04-23 16:22:18 info: Program[0]
+2023-04-23 16:22:18       Counter: 100000
+2023-04-23 16:22:18 info: Program[0]
+2023-04-23 16:22:18       Reset counter to 0
+2023-04-23 16:22:18 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:18       Connection d3f4d38 to member 760ad22 at 172.22.0.3:5701 closed.
+2023-04-23 16:22:18 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:18       Connection 40e7a20 to member 90db3c7 at 172.22.0.5:5701 closed.
+2023-04-23 16:22:18 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 16:22:18       Connection fb8d729 to member 56a2c38 at 172.22.0.6:5701 closed.

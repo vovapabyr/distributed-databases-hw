@@ -1,0 +1,85 @@
+2023-04-23 13:43:04 info: Hazelcast.Clustering.Heartbeat[0]
+2023-04-23 13:43:04       Heartbeat with 5000ms period and 60000ms timeout
+2023-04-23 13:43:04 fail: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:04       Failed to connect to address 172.18.0.3:5701.
+2023-04-23 13:43:04       System.Net.Sockets.SocketException (111): Connection refused
+2023-04-23 13:43:04          at Hazelcast.Core.SocketExtensions.ConnectAsync(Socket socket, EndPoint endPoint, Int32 timeoutMilliseconds, CancellationToken cancellationToken)
+2023-04-23 13:43:04          at Hazelcast.Networking.ClientSocketConnection.ConnectAsync(CancellationToken cancellationToken)
+2023-04-23 13:43:04          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:04          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:04          at Hazelcast.Clustering.ClusterConnections.ConnectAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:04          at Hazelcast.Clustering.ClusterConnections.ConnectFirstAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:05 fail: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:05       Failed to connect to address 172.18.0.6:5701.
+2023-04-23 13:43:05       System.Net.Sockets.SocketException (111): Connection refused
+2023-04-23 13:43:05          at Hazelcast.Core.SocketExtensions.ConnectAsync(Socket socket, EndPoint endPoint, Int32 timeoutMilliseconds, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Networking.ClientSocketConnection.ConnectAsync(CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.ClusterConnections.ConnectAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.ClusterConnections.ConnectFirstAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:05 fail: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:05       Failed to connect to address 172.18.0.5:5701.
+2023-04-23 13:43:05       System.Net.Sockets.SocketException (111): Connection refused
+2023-04-23 13:43:05          at Hazelcast.Core.SocketExtensions.ConnectAsync(Socket socket, EndPoint endPoint, Int32 timeoutMilliseconds, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Networking.ClientSocketConnection.ConnectAsync(CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.MemberConnection.ConnectAsync(ClusterState clusterState, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.ClusterConnections.ConnectAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:05          at Hazelcast.Clustering.ClusterConnections.ConnectFirstAsync(NetworkAddress address, CancellationToken cancellationToken)
+2023-04-23 13:43:05 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 13:43:05       Unable to connect to cluster after 1 attempts and 1163ms, will retry in 1000ms
+2023-04-23 13:43:07 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:07       Failed to connect to address 172.18.0.5:5701 (member is not active).
+2023-04-23 13:43:08 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:08       Failed to connect to address 172.18.0.6:5701 (member is not active).
+2023-04-23 13:43:08 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:08       Failed to connect to address 172.18.0.3:5701 (member is not active).
+2023-04-23 13:43:08 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 13:43:08       Unable to connect to cluster after 2 attempts and 3406ms, will retry in 1050ms
+2023-04-23 13:43:09 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:09       Failed to connect to address 172.18.0.3:5701 (member is not active).
+2023-04-23 13:43:09 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:09       Failed to connect to address 172.18.0.6:5701 (member is not active).
+2023-04-23 13:43:09 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:09       Failed to connect to address 172.18.0.5:5701 (member is not active).
+2023-04-23 13:43:09 warn: Hazelcast.Clustering.RetryStrategy[0]
+2023-04-23 13:43:09       Unable to connect to cluster after 3 attempts and 4468ms, will retry in 1102ms
+2023-04-23 13:43:10 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:10       Failed to connect to address 172.18.0.5:5701 (member is not active).
+2023-04-23 13:43:10 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:10       Failed to connect to address 172.18.0.6:5701 (member is not active).
+2023-04-23 13:43:10 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:10       Authenticated client 'Lost Update Test Client' (f748764) running version 5.2.1+b15eca on connection fdd6f8c from 172.18.0.2:46644 to member e6ac262 at 172.18.0.3:5701 of cluster 'dev' (e7f96cb) running version 5.2.1.
+2023-04-23 13:43:10 info: Hazelcast.Clustering.ClusterMembers[0]
+2023-04-23 13:43:10       Members [1] {
+2023-04-23 13:43:10           Id=e6ac262 Internal=172.18.0.3:5701* Public=<none> Adding
+2023-04-23 13:43:10       }
+2023-04-23 13:43:10 info: Program[0]
+2023-04-23 13:43:10       Starting: PesimisticLocking
+2023-04-23 13:43:15 info: Hazelcast.Clustering.ClusterMembers[0]
+2023-04-23 13:43:15       Members [3] {
+2023-04-23 13:43:15           Id=e6ac262 Internal=172.18.0.3:5701* Public=<none> Unchanged
+2023-04-23 13:43:15           Id=5a2051d Internal=172.18.0.5:5701* Public=<none> Adding
+2023-04-23 13:43:15           Id=6d212ff Internal=172.18.0.6:5701* Public=<none> Adding
+2023-04-23 13:43:15       }
+2023-04-23 13:43:15 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:15       Could not connect to member 5a2051d at 172.18.0.5:5701: failed (member is not active).
+2023-04-23 13:43:15 warn: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:15       Could not connect to member 6d212ff at 172.18.0.6:5701: failed (member is not active).
+2023-04-23 13:43:16 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:16       Authenticated client 'Lost Update Test Client' (f748764) running version 5.2.1+b15eca on connection c3b0bc1 from 172.18.0.2:34666 to member 5a2051d at 172.18.0.5:5701 of cluster 'dev' (e7f96cb) running version 5.2.1.
+2023-04-23 13:43:16 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 13:43:16       Authenticated client 'Lost Update Test Client' (f748764) running version 5.2.1+b15eca on connection 378e766 from 172.18.0.2:47268 to member 6d212ff at 172.18.0.6:5701 of cluster 'dev' (e7f96cb) running version 5.2.1.
+2023-04-23 14:01:13 info: Program[0]
+2023-04-23 14:01:13       Execution Time: 1083323 ms
+2023-04-23 14:01:13 info: Program[0]
+2023-04-23 14:01:13       Counter: 100000
+2023-04-23 14:01:13 info: Program[0]
+2023-04-23 14:01:13       Reset counter to 0
+2023-04-23 14:01:13 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 14:01:13       Connection fdd6f8c to member e6ac262 at 172.18.0.3:5701 closed.
+2023-04-23 14:01:13 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 14:01:13       Connection c3b0bc1 to member 5a2051d at 172.18.0.5:5701 closed.
+2023-04-23 14:01:13 info: Hazelcast.Clustering.ClusterConnections[0]
+2023-04-23 14:01:13       Connection 378e766 to member 6d212ff at 172.18.0.6:5701 closed.
