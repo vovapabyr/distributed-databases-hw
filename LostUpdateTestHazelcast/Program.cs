@@ -1,5 +1,6 @@
 ﻿using Hazelcast;
 using Hazelcast.Core;
+using Hazelcast.CP;
 using Hazelcast.DistributedObjects;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -44,6 +45,11 @@ async Task OptimisticLockingUpdateTest(IHMap<string, int> map)
     }
 }
 
+async Task AtomicLongUpdateTest(IAtomicLong atomicCounter)
+{
+    await atomicCounter.IncrementAndGetAsync();
+}
+
 #endregion
 
 #region helpers
@@ -58,7 +64,8 @@ async Task RunTest()
     logger.LogInformation($"Starting: {testName}");
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.Start();
-    
+
+    Func<Task> displayCounterAndReset = () => DisplayMapCounterAndReset(map, logger);
     IEnumerable<Task> tasks;
     switch (testName)
     {
@@ -72,6 +79,13 @@ async Task RunTest()
             await map.SetAsync(UserMapKey, 0);
             tasks = RunTasks(() => OptimisticLockingUpdateTest(map));
             break;
+        case "AtomicLong":
+            await using (var atomicCounter = await client.CPSubsystem.GetAtomicLongAsync(UserMapKey)) 
+            {
+                tasks = RunTasks(() => AtomicLongUpdateTest(atomicCounter));
+                displayCounterAndReset = () => DisplayAtomicLongCounterAndReset(atomicCounter, logger);
+            }
+            break;
         default:
             throw new NotSupportedException(testName);
     }
@@ -80,10 +94,25 @@ async Task RunTest()
 
     stopwatch.Stop();
     logger.LogInformation($"Execution Time: {stopwatch.ElapsedMilliseconds} ms");
+
+    await displayCounterAndReset();
+}
+
+async Task DisplayMapCounterAndReset(IHMap<string, int> map, ILogger<Program> logger) 
+{
     var value = await map.GetAsync(UserMapKey);
     logger.LogInformation($"Counter: {value}");
 
     await map.SetAsync(UserMapKey, 0);
+    logger.LogInformation($"Reset counter to 0");
+}
+
+async Task DisplayAtomicLongCounterAndReset(IAtomicLong atomicCounter, ILogger<Program> logger)
+{
+    var value = await atomicCounter.GetAsync();
+    logger.LogInformation($"Counter: {value}");
+
+    await atomicCounter.SetAsync(0);
     logger.LogInformation($"Reset counter to 0");
 }
 
@@ -102,9 +131,7 @@ IEnumerable<Task> RunTasks(Func<Task> testFunc)
     }
 }
 
-#endregion
-
-HazelcastOptions BuilHazelcastOptions() 
+HazelcastOptions BuilHazelcastOptions()
 {
     var options = new HazelcastOptionsBuilder().WithLoggerFactory(conf => LoggerFactory.Create(builder => builder.AddConsole())).Build();
 
@@ -116,3 +143,5 @@ HazelcastOptions BuilHazelcastOptions()
 
     return options;
 }
+
+#endregion

@@ -6,9 +6,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: [LostUpdate]
+    command: [AtomicLong]
   hazelcast:
     image: hazelcast/hazelcast:5.2.1
+    environment:
+    - JAVA_OPTS=-Dhazelcast.config=/opt/hazelcast/config/hazelcast.yaml
+    volumes:
+      - ./hazelcast.yaml:/opt/hazelcast/config/hazelcast.yaml
     ports:
       - 5701
   management-center:
