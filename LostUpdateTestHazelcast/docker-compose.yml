@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: [AtomicLong]
+    command: [LostUpdate]
   hazelcast:
     image: hazelcast/hazelcast:5.2.1
     environment:
