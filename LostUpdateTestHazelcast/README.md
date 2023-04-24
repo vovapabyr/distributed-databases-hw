@@ -1,6 +1,18 @@
 # Lost Update Hazelcast Solutions Test
 This project displays how can we get lost update problem in Hazelcast and different ways to fix it. Check [logs](logs) folder for logs.
 
+## How to run
+1. before starting application select which test you want to run (LostUpdate, PesimisticLocking, OptimisticLocking, AtomicLong) and set it in docker-compose.yaml file. Ex.:
+```
+lostupdatetesthazelcast:
+image: pabyrivskyiv/lostupdatetesthazelcast:latest
+build:
+  context: .
+  dockerfile: Dockerfile
+command: [AtomicLong]
+```
+2. run ```docker compose up --scale hazelcast=3``` to run hazelcast cluster with 3 nodes.
+
 ## Lost Update Test ~ 11s ([log file](logs/lost-update~11sec.txt))
 ![image](https://user-images.githubusercontent.com/25819135/233843644-a00bce3e-989b-4634-97c3-9615a28f2e5a.png)
 
