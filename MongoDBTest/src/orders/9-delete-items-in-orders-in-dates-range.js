@@ -7,6 +7,6 @@ db.orders.updateMany({
     ]
 },{
     $pull:{
-        items_id: "6447e92b84f0d2d330a9483c"
+        items_id: ObjectId("6448ea3e240816959ab93441")
     }   
 })

@@ -1,9 +1,9 @@
 use e-commerce
 
-db.orders.updateMany({items_id: {$in: ["6447db9569d8dabda1ea2075"]}},
+db.orders.updateMany({items_id: {$in: [ObjectId("6448ea3e240816959ab93441")]}},
 {
     $push:{
-        items_id: "6447db9569d8dabda1ea207d"
+        items_id: "6448ea3e240816959ab93449"
     },
     $inc:{
        total_sum: 250 
