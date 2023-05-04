@@ -1,0 +1,1 @@
+SELECT * FROM ecommerce.items_by_category WHERE category='TV' ORDER BY price DESC;

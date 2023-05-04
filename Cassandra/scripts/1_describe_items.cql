@@ -1,0 +1,1 @@
+DESCRIBE ecommerce.items_by_category;
