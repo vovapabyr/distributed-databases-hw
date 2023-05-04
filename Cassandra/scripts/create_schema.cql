@@ -1,7 +1,7 @@
 CREATE KEYSPACE IF NOT EXISTS ecommerce WITH replication = {'class': 'SimpleStrategy'};
 
 CREATE TABLE IF NOT EXISTS ecommerce.items_by_category (
-    id text,
+    id int,
     category text,
     name text,
     producer text,
