@@ -1,0 +1,2 @@
+- docker run --name cassandra-1 --network cassandra-network -d pabyrivskyiv/cassandra-mv-enabled:4.1.1
+- docker run -it -v /mnt/d/study/UCU/Distributed\ Databases/distributed-databases-hw/Cassandra/scripts:/scripts --name cassandra-cqlsh --network cassandra-network --rm pabyrivskyiv/cassandra-mv-enabled:4.1.1 cqlsh cassandra-1
