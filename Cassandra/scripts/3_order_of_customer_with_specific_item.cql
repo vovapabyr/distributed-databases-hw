@@ -1,0 +1,1 @@
+SELECT * FROM ecommerce.orders_by_customer WHERE customer='Volodymyr Pabyrivskyi' and items CONTAINS ('Watch', 2);

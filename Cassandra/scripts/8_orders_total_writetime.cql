@@ -1,0 +1,1 @@
+SELECT customer, id, order_date, items, total_sum, WRITETIME(total_sum) FROM ecommerce.orders_by_customer; 

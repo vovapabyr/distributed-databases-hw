@@ -1,0 +1,1 @@
+UPDATE ecommerce.orders_by_customer SET items = [('TV', 1), ('TV', 4)], total_sum = 3500 WHERE customer = 'Volodymyr Pabyrivskyi' AND order_date = '2023-04-25' AND id = 1;

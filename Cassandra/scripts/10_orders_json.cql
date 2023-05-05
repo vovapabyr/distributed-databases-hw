@@ -1,0 +1,1 @@
+SELECT JSON * FROM ecommerce.orders_by_customer;

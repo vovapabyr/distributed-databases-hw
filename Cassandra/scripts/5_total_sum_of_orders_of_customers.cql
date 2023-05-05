@@ -1,0 +1,1 @@
+SELECT customer, SUM(total_sum) FROM ecommerce.orders_by_customer GROUP BY customer;

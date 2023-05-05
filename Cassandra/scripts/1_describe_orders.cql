@@ -1,0 +1,1 @@
+DESCRIBE ecommerce.orders_by_customer;
