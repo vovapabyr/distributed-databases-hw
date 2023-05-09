@@ -1,0 +1,5 @@
+db.items.find({}).readPref("primary")
+db.items.find({}).readPref("primaryPreferred")
+db.items.find({}).readPref("secondary")
+db.items.find({}).readPref("secondaryPreferred")
+db.items.find({}).readPref("nearest")

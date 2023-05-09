@@ -1,0 +1,1 @@
+db.items.insertOne({"category": "TV", "model": "LCD", "producer": "SONY", "price": 1000, "size": 45, "resolution": "FullHD"}, {writeConcern: {w: 3}}) 
