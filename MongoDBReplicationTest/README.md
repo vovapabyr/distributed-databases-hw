@@ -1,4 +1,4 @@
-# Mongosh scrpts results
+# Mongosh scripts results
 ## How to run
 Before running mongodb replica set in docker, create network: ```docker network create mongo-cluster-6-hw``` 
 ### Run cluster of three nodes
