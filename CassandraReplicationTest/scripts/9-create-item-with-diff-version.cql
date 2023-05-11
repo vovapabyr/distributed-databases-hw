@@ -1,0 +1,3 @@
+INSERT INTO itemskeyspace.items_by_category JSON '{"id":100, "category": "Phone", "name": "iPhone 15", "producer": "Apple", "price": 10000, "data": {"Node": "1"}}';
+INSERT INTO itemskeyspace.items_by_category JSON '{"id":100, "category": "Phone", "name": "iPhone 15", "producer": "Apple", "price": 10000, "data": {"Node": "2"}}';
+INSERT INTO itemskeyspace.items_by_category JSON '{"id":100, "category": "Phone", "name": "iPhone 15", "producer": "Apple", "price": 10000, "data": {"Node": "3"}}';
