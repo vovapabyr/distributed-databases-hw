@@ -32,9 +32,16 @@ As you can see on the image below, each node holds:
 ### 7 Check nodes which holds specific partition
 ![7-check-parition-replication](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/bda2fc66-20a8-4576-8e05-226d7d78f461)
 
-
-
-docker network disconnect cassandra-network cassandra-2
-docker network disconnect cassandra-network cassandra-3
+### 8 Check possible consistency levels of reads/writes with one node off
+#### Items (replication factor=3)
+User should always be able to write/read with ONE, TWO=QUORUM consistency levels, as each node holds each partition of items table, thus allowing always to read with QUORUM=TWO consistency level. Apparently, user cannot write/read items with ALL(THREE) consistency level.
+![8-items-keyspace-test-concern-levels](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/3a4ff95b-d197-4972-9a58-dd8b3ddb697c)
+#### Orders (replication factor=2)
+User should always be able to write/read with ONE consistency level. But, here it becomes more tricky, for TWO=QUORUM=ALL=2 it depends on, which nodes are going to store partition that the user try to insert data on. If it happens that correpsonding partition replicas are stored on two live nodes, then we will be able to insert/read data with TWO=QUORUM=ALL consistency levels:
+![8 1-orders-keyspace-test-concern-levels](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/322cdd64-954c-45d0-9109-e6a853aad5c1)
+But if it happens that partitioner directs one replica of the partition to the dead node, insert/read with TWO=QUORUM=ALL consistency levels would fail.
+#### Reviews (replication factor=1)
+Similiar story to orders: ONE=ALL would fail if the partition is stored on dead node, otherwise will succecced. One the image below, you can see that review record, with partition key=("Consistency", 1) is successfuly inserted with ONE=ALL consistency level, while record with partition key=("Watch", 1) failed to insert with the same ONE=ALL consistency level:
+![8 2-reviews-keyspace-test-consern-levels](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/76329532-7168-46e9-8264-f8025be5000d)
 
 INSERT INTO itemskeyspace.items_by_category JSON '{"id":100, "category": "Phone", "name": "iPhone 15", "producer": "Apple", "price": 10000, "data": {"Node": "3"}}';
