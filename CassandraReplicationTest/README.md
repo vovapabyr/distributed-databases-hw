@@ -31,7 +31,6 @@ As you can see on the image below, each node holds:
 ![6-check-keyspace-status](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/613b079e-c462-4819-8a1c-892705a8ee77)
 ### 7 Check nodes which holds specific partition
 ![7-check-parition-replication](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/bda2fc66-20a8-4576-8e05-226d7d78f461)
-
 ### 8 Check possible consistency levels of reads/writes with one node off
 #### Items (replication factor=3)
 User should always be able to write/read with ONE, TWO=QUORUM consistency levels, as each node holds each partition of items table, thus allowing always to read with QUORUM=TWO consistency level. Apparently, user cannot write/read items with ALL(THREE) consistency level.
@@ -43,5 +42,20 @@ But if it happens that partitioner directs one replica of the partition to the d
 #### Reviews (replication factor=1)
 Similiar story to orders: ONE=ALL would fail if the partition is stored on dead node, otherwise will succecced. One the image below, you can see that review record, with partition key=("Consistency", 1) is successfuly inserted with ONE=ALL consistency level, while record with partition key=("Watch", 1) failed to insert with the same ONE=ALL consistency level:
 ![8 2-reviews-keyspace-test-consern-levels](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/76329532-7168-46e9-8264-f8025be5000d)
+### 9 Partition cluster
+Disconect nodes 2 and 3 from the 'cassandra-network':
+ - ```docker network disconnect cassandra-network cassandra-2```
+ - ```docker network disconnect cassandra-network cassandra-3```
+### 10 Add different version of the data with the same primary key to all three nodes
+ - add data to nodes 2 and 3
+![9,10,11-split-brain-2,3-node](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/d46b7425-d0d9-457a-8f91-d82b77aa961d)
+ - add data to 1 node
+![9,10,11-split-brain-3,1-node](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/3983daa2-79e3-4ddf-b2d5-7538362122e3)
+### 11 Connect 2 and 3 nodes back to the main network and observer results
+Connect 2 and 3 nodes back to the main network:
+ - ```docker network connect --ip 172.18.0.3 cassandra-network cassandra-2```
+ - ```docker network connect --ip 172.18.0.4 cassandra-network cassandra-3```
 
-INSERT INTO itemskeyspace.items_by_category JSON '{"id":100, "category": "Phone", "name": "iPhone 15", "producer": "Apple", "price": 10000, "data": {"Node": "3"}}';
+After reunion we can observe that node 1 version of data replaced values on nodes 2 and 3:  
+![9,10,11-split-brain-reunioin-result](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/7fbb5147-3c0a-4833-9696-6cea5ef510f8)
+The reason for that was, that node 1 version of data was written last, which means that it has the latest timestamp. So, after reunion node 1 with the help of 'hinted handoff' mechanism propogates its own version of data to nodes 2 and 3.  
