@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS reviewskeyspace.reviews_by_item (
     id int,
     customer text,
     rating int,
-    item_id int,
+    item_id tuple<text, int>,
     PRIMARY KEY ((item_id), rating, customer, id));
