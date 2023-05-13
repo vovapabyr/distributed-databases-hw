@@ -58,4 +58,12 @@ Connect 2 and 3 nodes back to the main network:
 
 After reunion we can observe that node 1 version of data replaced values on nodes 2 and 3:  
 ![9,10,11-split-brain-reunioin-result](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/7fbb5147-3c0a-4833-9696-6cea5ef510f8)
-The reason for that was, that node 1 version of data was written last, which means that it has the latest timestamp. So, after reunion node 1 with the help of 'hinted handoff' mechanism propogates its own version of data to nodes 2 and 3.  
+The reason for that was, that node 1 version of data was written last, which means that it has the latest timestamp. So, after reunion node 1 with the help of 'hinted handoff' mechanism propogates its own version of data to nodes 2 and 3.
+### 12 Lightweight transactions
+#### Connected cluster
+Lets try to insert different version of data with the same primary key on three different nodes using lightweight transaction. First lets add data on node 2, then node 3, and node 1. On the image below you can see that the first version of data (node 2) was preserved because of using transactions:
+![12-lightweight-transactions-preserve-original-value](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/5635556d-b040-4b8d-bfaf-2aa0034d2d09)
+#### Paritioned cluster
+Lightweight transaction uses Paxos consensus protocol under the hood, which requires SERIAL(QUORUM) consistency level. That's why on the image below you can see, that all nodes cannot add new data to the cluster, because any of them cannot form the majority to execute lightweight transaction:
+![12-lightweight-transactions-fails-with-no-majority](https://github.com/vovapabyr/distributed-databases-tests/assets/25819135/185fb18f-5d67-4858-8a47-ae114b883594)
+
